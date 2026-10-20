@@ -4,7 +4,7 @@
 
 一个采用 [Agent Skills](https://agentskills.io/specification) 格式的需求分析与 PRD 编写技能，面向支持该格式的 AI 助手。支持从招标文件、需求书、功能清单和访谈记录出发，梳理产品范围、用户任务、业务流程和页面字段，保留原文依据，并指出仍需决定的问题。
 
-当前版本：**v1.7** · [技能定义](SKILL.md) · [平台兼容与验证](#平台兼容与验证) · [安装](#安装) · [快速开始](#快速开始) · [回归场景](evals/scenarios.md)
+当前版本：**v1.7** · [MIT License](LICENSE) · [技能定义](SKILL.md) · [安装](#安装) · [公开样本与评测](evals/README.md) · [变更记录](CHANGELOG.md)
 
 ## 为什么做这个项目
 
@@ -46,7 +46,7 @@ requirements-to-prd 为 AI 提供一套需求整理与核验方法，让生成�
 | 工具 | 格式与使用说明 | 本仓库验证情况 |
 |---|---|---|
 | Codex | 本仓库提供安装示例，使用全局技能目录 | 已安装并用于 PRD 生成与评审 |
-| Claude Code | 支持 Agent Skills，可读取技能及配套参考文件；见[官方文档](https://code.claude.com/docs/en/skills) | 尚未实测本技能 |
+| Claude Code | 支持 Agent Skills，可读取技能及配套参考文件；见[官方文档](https://code.claude.com/docs/en/skills) | 已记录 CLI 全量规则注入对照；原生技能加载尚未验证 |
 | Cursor | 支持技能目录和 `SKILL.md`；见[官方文档](https://cursor.com/help/customization/skills) | 尚未实测本技能 |
 
 格式支持不代表各平台的生成效果已经验证，也不保证不同模型输出相同。迁移后可使用 [回归场景](evals/scenarios.md) 检查技能加载、来源追溯、字段细则和业务推演；实际生成的 PRD 仍需评审。
@@ -60,18 +60,18 @@ requirements-to-prd 为 AI 提供一套需求整理与核验方法，让生成�
 ```text
 请使用 skill-installer，从 https://github.com/xtianyaa/requirements-to-prd
 安装 requirements-to-prd 到全局技能目录。
-使用 v1.7 对应的提交：24514d47c352515d478e8b397569d07881e830f4。
+使用发布标签 v1.7。
 如果已经安装，请备份旧版后更新。
 ```
 
-指定提交可以固定技能版本，避免安装到其他分支上的旧版本。该提交的 [SKILL.md](https://github.com/xtianyaa/requirements-to-prd/blob/24514d47c352515d478e8b397569d07881e830f4/SKILL.md) 包含 v1.7 的功能定义。安装后在下一轮对话中调用。
+使用[发布标签 v1.7](https://github.com/xtianyaa/requirements-to-prd/releases/tag/v1.7)固定安装快照；Release、技能元数据与变更记录对应同一版本。安装后在下一轮对话中调用。
 
 ### 手动安装到 Codex、Claude Code 或 Cursor
 
-1. 下载或克隆本仓库，并切换到所需版本；安装 v1.7 可使用上面的提交。
+1. 下载对应 Release，或克隆本仓库并执行 `git checkout v1.7`。
 2. 在所用工具的技能目录下创建 `requirements-to-prd` 文件夹，个人技能目录见下表。
-3. 将 `SKILL.md`、`README.md`、`references/` 和 `evals/` 复制进去，无需复制 `.git/`。
-4. 按对应工具的技能加载方式启用，并使用下方提示词。本仓库尚未在 Claude Code、Cursor 中实测，请先确认技能和参考文件能够被读取。
+3. 将 `SKILL.md`、`LICENSE`、`README.md`、`references/` 复制进去；`evals/`、`scripts/` 和 `CHANGELOG.md` 按验证或查阅需要保留，无需复制 `.git/`。
+4. 按对应工具的技能加载方式启用，并使用下方提示词。本仓库尚未验证 Claude Code、Cursor 的原生技能加载，请先确认技能和参考文件能够被读取。
 
 默认个人技能目录为：
 
@@ -135,6 +135,16 @@ requirements-to-prd 为 AI 提供一套需求整理与核验方法，让生成�
 
 具体章节和表格按项目复杂度组织，不要求每份材料套用同一套目录。字段表和场景推演仍需评审，示例不代表项目业务已确认。
 
+## 公开样本与评测
+
+仓库提供三个合成需求及逐项评分标准：公告浏览、项目台账、企业联系人。材料不包含客户资料；实际输出是一次生成样本，不是唯一正确的 PRD 模板。
+
+输入、对照协议、运行记录和工具说明见[评测目录](evals/README.md)。核心技能是 Markdown，无 Python 依赖；请求准备与记录完整性检查工具需要 Python 3.10+，不调用模型、不自动判断业务正确性。
+
+评测区分不使用技能的 baseline 与使用 v1.7 的 skill 组，保留结果和失败记录。单模型、小样本、单次运行不能证明普遍提升；工具安装或格式兼容也不等于实际生成质量已经验证。
+
+首轮 [v1.7 对照记录](evals/runs/2026-10-20-v1.7/README.md)包含3组输入、6份原始输出、逐项AI审阅和失败记录。返回的模型 ID 为 `deepseek-v4-pro`，不作为 Claude Sonnet 或跨模型验证。发现的问题保留在报告中。
+
 ## 能力边界
 
 这个 Skill 提供需求分析和文档生成方法，输出质量仍取决于材料完整性、模型执行和人工评审。
@@ -150,14 +160,23 @@ requirements-to-prd 为 AI 提供一套需求整理与核验方法，让生成�
 requirements-to-prd/
 ├── SKILL.md                              # 技能入口与核心规则
 ├── README.md                             # 项目介绍与使用指南
+├── LICENSE                               # MIT License
+├── CHANGELOG.md                          # 发布与变更记录
 ├── references/
 │   ├── page-composition-rules.md          # 页面组合、导航和多视图
 │   ├── page-data-flow.md                  # 页面读写、关联与历史结果
 │   ├── page-field-specification.md        # 页面字段细则
 │   └── business-readiness.md              # 业务推演与后续工作条件
-└── evals/
-    └── scenarios.md                       # 修改技能后的回归场景
+├── evals/
+│   ├── README.md                          # 对照协议与复现说明
+│   ├── scenarios.md                       # 文字回归场景
+│   ├── cases/                             # 合成输入与逐项 rubric
+│   └── runs/                              # 实际输出、记录和评审
+└── scripts/
+    └── eval_bundle.py                     # 准备请求、核验记录完整性
 ```
+
+辅助工具的完整性测试见 `tests/`，可运行 `python -m unittest discover -s tests`；不调用模型，也不验证业务生成效果。
 
 ## 版本说明
 
@@ -170,3 +189,7 @@ requirements-to-prd/
 欢迎通过 [Issues](https://github.com/xtianyaa/requirements-to-prd/issues) 反馈问题，或提交 Pull Request。
 
 描述问题时，请附上技能版本、脱敏后的最小输入、实际输出与期望结果。修改技能规则后，请结合 [回归场景](evals/scenarios.md) 检查输出是否改善；仅检查文档结构和链接不足以验证业务质量。
+
+## 许可证
+
+本项目采用 [MIT License](LICENSE)，版权署名为 `Copyright (c) 2026 xtianyaa`。复制或分发时请保留版权和许可声明；完整条款及免责声明以 LICENSE 为准。

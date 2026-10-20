@@ -1,0 +1,428 @@
+[
+  {
+    "case_id": "contacts",
+    "arm": "baseline",
+    "status": "completed",
+    "model_reported": "deepseek-v4-pro",
+    "cli_model_alias": "sonnet",
+    "cli_version": "2.1.79",
+    "timestamp_utc": "2026-10-20T09:30:26.1838388Z",
+    "ended_utc": "2026-10-20T09:32:09.3104655Z",
+    "wall_seconds": 103.127,
+    "session_fresh": true,
+    "session_identity_sha256": "7c7ba2dcc3387357fa9a808da7a16cc9e3081fb28c99dc790b938556b9a580fe",
+    "delegate_run_id": "20261020_173028_885_d6b36aa5",
+    "artifact_verification_exit_code": 0,
+    "activation_mode": "injected-full-bundle-not-native-discovery",
+    "reviewer_type": "maintainer-assistant",
+    "review_blinded": false,
+    "human_business_review": false,
+    "output_file": "outputs/contacts.baseline.md",
+    "output_sha256": "df194b41ea535714cda2f9bc4ce6c38e683750db36d9dcd36bad285b84a2dbda",
+    "output_bytes": 12225,
+    "output_characters": 5255,
+    "ratings": [
+      {
+        "id": "C-A",
+        "result": "pass",
+        "evidence": "outputs/contacts.baseline.md:L14 — 合规联络人、数据安全负责人、经办人、技术联系人、应急联系人",
+        "reason": "五类角色、联系方式、有效期、离职变更和通知/工单用途均保留。"
+      },
+      {
+        "id": "C-B",
+        "result": "partial",
+        "evidence": "outputs/contacts.baseline.md:L107 — | 离职登记 | 离职日期、在途工单处理方式、接管人 | 【事实】C02 |",
+        "reason": "提供了字段候选，但将未给定的在途处理方式/接管人标成事实；也没有充分定义各字段控件。"
+      },
+      {
+        "id": "C-C",
+        "result": "pass",
+        "evidence": "outputs/contacts.baseline.md:L119 — 校验规则建议：手机号按 11 位格式",
+        "reason": "11位手机、人数、期限和优先级虽有较强建议，但在建议/待确认段落中提出，未将其声明为正式已确认规则。"
+      },
+      {
+        "id": "C-D",
+        "result": "partial",
+        "evidence": "outputs/contacts.baseline.md:L99 — ### 5.4 维护动作字段候选",
+        "reason": "页面与动作有分区，但详情字段的只读/编辑条件和离职动作的具体字段条件仍不明确，表格还混用事实标注。"
+      },
+      {
+        "id": "C-E",
+        "result": "pass",
+        "evidence": "outputs/contacts.baseline.md:L157 — 此排序为待评审假设。",
+        "reason": "匹配/离职默认策略是明确标为待评审的假设，末尾排除业务确认；不能将这些假设当真实改派承诺。"
+      },
+      {
+        "id": "C-F",
+        "result": "partial",
+        "evidence": "outputs/contacts.baseline.md:L172 — 手机号 138****1234",
+        "reason": "给出场景和下一步，但场景1把带星号的录入值判为手机号格式通过，与建议11位格式不自洽；不是一次真实测试。"
+      }
+    ],
+    "cli_reported_usage": {
+      "input_tokens": 32235,
+      "output_tokens": 5839,
+      "cache_read_input_tokens": 168832,
+      "cache_creation_input_tokens": 0
+    },
+    "cli_reported_total_cost_usd": 0.39156599999999997
+  },
+  {
+    "case_id": "contacts",
+    "arm": "skill",
+    "status": "completed",
+    "model_reported": "deepseek-v4-pro",
+    "cli_model_alias": "sonnet",
+    "cli_version": "2.1.79",
+    "timestamp_utc": "2026-10-20T09:40:14.4495419Z",
+    "ended_utc": "2026-10-20T09:42:45.3013186Z",
+    "wall_seconds": 150.852,
+    "session_fresh": true,
+    "session_identity_sha256": "c5c5da6986e6d7367eddb570692b2f3da87e951df86945b21e990e508bd06d0f",
+    "delegate_run_id": "20261020_174016_137_5fef82fb",
+    "artifact_verification_exit_code": 0,
+    "activation_mode": "injected-full-bundle-not-native-discovery",
+    "reviewer_type": "maintainer-assistant",
+    "review_blinded": false,
+    "human_business_review": false,
+    "output_file": "outputs/contacts.skill.md",
+    "output_sha256": "d5b3d0c26c7a1eff1d7272debefcf4620b093dadf9ff5b3c294f983d7250547b",
+    "output_bytes": 17507,
+    "output_characters": 7571,
+    "ratings": [
+      {
+        "id": "C-A",
+        "result": "pass",
+        "evidence": "outputs/contacts.skill.md:L79 — 角色名称，未给出各角色的职责边界与使用场景。",
+        "reason": "五类角色与校验/有效期/离职变更/匹配用途保留，且角色名称与职责建议分开。"
+      },
+      {
+        "id": "C-B",
+        "result": "pass",
+        "evidence": "outputs/contacts.skill.md:L165 — ### 6.4 新建/编辑",
+        "reason": "字段、控件、默认、条件、反馈和候选属性都具体，未只交缺口表。"
+      },
+      {
+        "id": "C-C",
+        "result": "pass",
+        "evidence": "outputs/contacts.skill.md:L91 — 手机号：11 位数字、以 1 开头【建议】",
+        "reason": "具体手机、人数、期限、审核和排序方案均标建议或待确认，未当作原文正式规则。"
+      },
+      {
+        "id": "C-D",
+        "result": "pass",
+        "evidence": "outputs/contacts.skill.md:L181 — ### 6.5 离职/变更登记",
+        "reason": "查询/列表/详情/维护与离职动作分开，字段条件和未知项关联 KD 编号。"
+      },
+      {
+        "id": "C-E",
+        "result": "partial",
+        "evidence": "outputs/contacts.skill.md:L230 — 预期：取唯一 1 人作为责任人。",
+        "reason": "场景4只有两名在职有效技术联系人，没有二者日期/更新时间等排序输入，却断言能唯一选人；即使规则是候选，具体推演仍缺判据。"
+      },
+      {
+        "id": "C-F",
+        "result": "partial",
+        "evidence": "outputs/contacts.skill.md:L279 — 进入详细功能设计或开发前，须先确认第 2 节关键决定",
+        "reason": "已给具体推演且不追加数据库/API，但末尾要求先确认全部关键决定后进入详细设计，与§1.3可作原型/详细设计输入的说法不一致，可先行范围仍不够明确。"
+      }
+    ],
+    "cli_reported_usage": {
+      "input_tokens": 45037,
+      "output_tokens": 11325,
+      "cache_read_input_tokens": 275200,
+      "cache_creation_input_tokens": 0
+    },
+    "cli_reported_total_cost_usd": 0.64591,
+    "setup_failures": [
+      {
+        "run_id": "20261020_173049_828_c59e3b30",
+        "timestamp_utc": "2026-10-20T09:30:48.0193487Z",
+        "exit_code": 1,
+        "model_started": false,
+        "category": "sandbox-permission"
+      },
+      {
+        "run_id": "20261020_173204_573_6eae6ff5",
+        "timestamp_utc": "2026-10-20T09:32:02.6600801Z",
+        "exit_code": 1,
+        "model_started": false,
+        "category": "stale-session"
+      }
+    ],
+    "approval_rejection_before_additional_run": true,
+    "additional_run_direct_user_approval": true
+  },
+  {
+    "case_id": "notice",
+    "arm": "baseline",
+    "status": "completed",
+    "model_reported": "deepseek-v4-pro",
+    "cli_model_alias": "sonnet",
+    "cli_version": "2.1.79",
+    "timestamp_utc": "2026-10-20T09:32:51.4505855Z",
+    "ended_utc": "2026-10-20T09:33:30.755656Z",
+    "wall_seconds": 39.305,
+    "session_fresh": true,
+    "session_identity_sha256": "0f19fdb1255a185632dc4d04e93b568fd423dcb23801daaf4ac919731d77866b",
+    "delegate_run_id": "20261020_173253_114_fc9def88",
+    "artifact_verification_exit_code": 0,
+    "activation_mode": "injected-full-bundle-not-native-discovery",
+    "reviewer_type": "maintainer-assistant",
+    "review_blinded": false,
+    "human_business_review": false,
+    "output_file": "outputs/notice.baseline.md",
+    "output_sha256": "eb4284c111e513fdf8a9428f43924e677546e3e303d2d35b6cd5359d5093b53d",
+    "output_bytes": 2782,
+    "output_characters": 1168,
+    "ratings": [
+      {
+        "id": "N-A",
+        "result": "pass",
+        "evidence": "outputs/notice.baseline.md:L7 — 面向访客提供已发布公告的查询与浏览能力。",
+        "reason": "N01-N03 可追踪，已发布范围、查询、详情与返回均有承载。"
+      },
+      {
+        "id": "N-B",
+        "result": "pass",
+        "evidence": "outputs/notice.baseline.md:L42 — 输入为空时返回全部已发布公告。",
+        "reason": "查询与详情展示分开，空查询与无匹配有行为；范围明确没有编辑。"
+      },
+      {
+        "id": "N-C",
+        "result": "pass",
+        "evidence": "outputs/notice.baseline.md:L49 — 本轮不提供公告的新增、编辑、删除、上下架、审批、登录鉴权、导出等功能入口。",
+        "reason": "未扩建排除功能，也未追加数据库/API。"
+      },
+      {
+        "id": "N-D",
+        "result": "partial",
+        "evidence": "outputs/notice.baseline.md:L42 — 按标题做包含匹配（模糊查询）",
+        "reason": "包含匹配、空标题正文占位等新增规则没有在各处标成建议；第4节虽标交互建议，但没有覆盖这些规则。"
+      },
+      {
+        "id": "N-E",
+        "result": "partial",
+        "evidence": "outputs/notice.baseline.md:L42 — 关键词查询（N01）",
+        "reason": "有空查询和空结果预期，但没有固定公告数据与具体正常关键词，不能直接复核命中集合。"
+      },
+      {
+        "id": "N-F",
+        "result": "partial",
+        "evidence": "outputs/notice.baseline.md:L51 — ## 4. 交互建议",
+        "reason": "篇幅简明且未声称已实测；没有说明下一步可进入哪些设计活动。"
+      }
+    ],
+    "cli_reported_usage": {
+      "input_tokens": 28002,
+      "output_tokens": 2085,
+      "cache_read_input_tokens": 106880,
+      "cache_creation_input_tokens": 0
+    },
+    "cli_reported_total_cost_usd": 0.24557500000000002
+  },
+  {
+    "case_id": "notice",
+    "arm": "skill",
+    "status": "completed",
+    "model_reported": "deepseek-v4-pro",
+    "cli_model_alias": "sonnet",
+    "cli_version": "2.1.79",
+    "timestamp_utc": "2026-10-20T09:32:45.6603237Z",
+    "ended_utc": "2026-10-20T09:34:07.4918886Z",
+    "wall_seconds": 81.832,
+    "session_fresh": true,
+    "session_identity_sha256": "622047e976537a57cc7b51116e82f40f34bc70dfe89a1f732d850471942762f7",
+    "delegate_run_id": "20261020_173247_505_e21ba00c",
+    "artifact_verification_exit_code": 0,
+    "activation_mode": "injected-full-bundle-not-native-discovery",
+    "reviewer_type": "maintainer-assistant",
+    "review_blinded": false,
+    "human_business_review": false,
+    "output_file": "outputs/notice.skill.md",
+    "output_sha256": "52a8739137cf7832b2b2a67a81d5bb7c54d15ff57a00d8f70569089cb2173f76",
+    "output_bytes": 4815,
+    "output_characters": 2111,
+    "ratings": [
+      {
+        "id": "N-A",
+        "result": "pass",
+        "evidence": "outputs/notice.skill.md:L5 — 需求编号 N01–N03",
+        "reason": "需求来源可追踪，两页和返回对应 N01/N02，范围限定明确。"
+      },
+      {
+        "id": "N-B",
+        "result": "pass",
+        "evidence": "outputs/notice.skill.md:L38 — 否（空=查全部已发布公告）",
+        "reason": "查询字段可空，详情逐项只读，空结果和重置有行为。"
+      },
+      {
+        "id": "N-C",
+        "result": "pass",
+        "evidence": "outputs/notice.skill.md:L8 — 不含数据库表、API、视觉原型。",
+        "reason": "没有添加维护、登录、审批、导出等排除功能。"
+      },
+      {
+        "id": "N-D",
+        "result": "partial",
+        "evidence": "outputs/notice.skill.md:L38 — 去除首尾空格后为空视为无条件查询",
+        "reason": "多处建议有标注，但空查询/去空格规则未标建议，结合“事实不加标注”约定仍有事实与候选混用。"
+      },
+      {
+        "id": "N-E",
+        "result": "partial",
+        "evidence": "outputs/notice.skill.md:L66 — S1 正常查询命中",
+        "reason": "场景有预期，但正常输入仍是“标题关键词”，未提供固定关键词和公告数据。"
+      },
+      {
+        "id": "N-F",
+        "result": "pass",
+        "evidence": "outputs/notice.skill.md:L99 — 原型设计（列表页、详情页、空结果态、返回交互）。",
+        "reason": "字段表与当前任务相关，明确下一阶段，未声称系统已经实现。"
+      }
+    ],
+    "cli_reported_usage": {
+      "input_tokens": 37486,
+      "output_tokens": 5346,
+      "cache_read_input_tokens": 215040,
+      "cache_creation_input_tokens": 0
+    },
+    "cli_reported_total_cost_usd": 0.4286
+  },
+  {
+    "case_id": "project-register",
+    "arm": "baseline",
+    "status": "completed",
+    "model_reported": "deepseek-v4-pro",
+    "cli_model_alias": "sonnet",
+    "cli_version": "2.1.79",
+    "timestamp_utc": "2026-10-20T09:34:01.1229763Z",
+    "ended_utc": "2026-10-20T09:35:47.6131483Z",
+    "wall_seconds": 106.49,
+    "session_fresh": true,
+    "session_identity_sha256": "cfa9bd8b2756d5e6688d56628a5d324ec4f5f5080b50df61eaf25d0469170ece",
+    "delegate_run_id": "20261020_173403_001_865b93ae",
+    "artifact_verification_exit_code": 0,
+    "activation_mode": "injected-full-bundle-not-native-discovery",
+    "reviewer_type": "maintainer-assistant",
+    "review_blinded": false,
+    "human_business_review": false,
+    "output_file": "outputs/project-register.baseline.md",
+    "output_sha256": "3ebee71a30d54eba6535889c85af6b7d68edf5f89c2cd58e7dc7983921b41083",
+    "output_bytes": 12955,
+    "output_characters": 5687,
+    "ratings": [
+      {
+        "id": "P-A",
+        "result": "pass",
+        "evidence": "outputs/project-register.baseline.md:L177 — ### 7.2 各界面字段一览",
+        "reason": "查询、列表、详情与表单字段有落点，原需求编号可追踪。"
+      },
+      {
+        "id": "P-B",
+        "result": "pass",
+        "evidence": "outputs/project-register.baseline.md:L190 — 推荐 B（保留并仅在提交时按新类型校验）。",
+        "reason": "外包/内部条件和本企业目录明确，旧值处理明确列为待决定候选。"
+      },
+      {
+        "id": "P-C",
+        "result": "pass",
+        "evidence": "outputs/project-register.baseline.md:L62 — **缺失 ≠ 0**",
+        "reason": "预算单位/精度/非负、零与空不同、日期关系和不预填今天均保留。"
+      },
+      {
+        "id": "P-D",
+        "result": "partial",
+        "evidence": "outputs/project-register.baseline.md:L119 — 允许以空表单或部分字段进行暂存。",
+        "reason": "§5.3 允许空表单暂存，与§5.5及P05仅名称必填矛盾；提交后只读与无审批已明确。"
+      },
+      {
+        "id": "P-E",
+        "result": "pass",
+        "evidence": "outputs/project-register.baseline.md:L37 — 企业项目管理员仅能查询、查看、编辑**本企业**的项目。",
+        "reason": "读取、写入和服务商范围都有限定，并有跨企业拒绝场景，不仅隐藏按钮。"
+      },
+      {
+        "id": "P-F",
+        "result": "partial",
+        "evidence": "outputs/project-register.baseline.md:L208 — **场景 B：外包项目的完整流程**",
+        "reason": "零预算、缺服务商、日期倒置和草稿都有具体输入；缺少已提交后尝试改写的独立反例。"
+      }
+    ],
+    "cli_reported_usage": {
+      "input_tokens": 29967,
+      "output_tokens": 7238,
+      "cache_read_input_tokens": 184320,
+      "cache_creation_input_tokens": 0
+    },
+    "cli_reported_total_cost_usd": 0.422945
+  },
+  {
+    "case_id": "project-register",
+    "arm": "skill",
+    "status": "completed",
+    "model_reported": "deepseek-v4-pro",
+    "cli_model_alias": "sonnet",
+    "cli_version": "2.1.79",
+    "timestamp_utc": "2026-10-20T09:34:37.6656083Z",
+    "ended_utc": "2026-10-20T09:37:46.398095Z",
+    "wall_seconds": 188.732,
+    "session_fresh": true,
+    "session_identity_sha256": "6d791614292815618745947a8c1e19de71ca4975f93099734bc82b0f2d37c45d",
+    "delegate_run_id": "20261020_173439_350_b6f3949b",
+    "artifact_verification_exit_code": 0,
+    "activation_mode": "injected-full-bundle-not-native-discovery",
+    "reviewer_type": "maintainer-assistant",
+    "review_blinded": false,
+    "human_business_review": false,
+    "output_file": "outputs/project-register.skill.md",
+    "output_sha256": "8406a382facf39c4a5dc0d1045f1d643470745663558279f3cf124e5c19d2100",
+    "output_bytes": 16525,
+    "output_characters": 7372,
+    "ratings": [
+      {
+        "id": "P-A",
+        "result": "pass",
+        "evidence": "outputs/project-register.skill.md:L87 — ### 2.5 项目表单页",
+        "reason": "各页与字段、动作、来源和需求映射完整，展示与输入用途可区分。"
+      },
+      {
+        "id": "P-B",
+        "result": "pass",
+        "evidence": "outputs/project-register.skill.md:L14 — 切回「内部」时**清空服务商**",
+        "reason": "旧值清理标为候选；内外包条件与本企业目录明确，不任取同名服务商。"
+      },
+      {
+        "id": "P-C",
+        "result": "partial",
+        "evidence": "outputs/project-register.skill.md:L109 — 仅校验**名称非空**；其余字段不校验、可留空。",
+        "reason": "预算和日期的总体定义正确，但暂存明确不校验其他字段，未区分“可缺项”和“已填非法值”，使非法预算/日期可暂存。"
+      },
+      {
+        "id": "P-D",
+        "result": "pass",
+        "evidence": "outputs/project-register.skill.md:L34 — 全部业务编辑字段只读",
+        "reason": "暂存/提交必填分开，提交后所有业务字段只读，没有审批或擅增撤回。"
+      },
+      {
+        "id": "P-E",
+        "result": "pass",
+        "evidence": "outputs/project-register.skill.md:L189 — 不可见、不可操作（仅本企业）",
+        "reason": "读写范围、关联目录和跨企业拒绝都有说明，不只依赖按钮隐藏。"
+      },
+      {
+        "id": "P-F",
+        "result": "pass",
+        "evidence": "outputs/project-register.skill.md:L188 — | F7 | P01 | 管理员，已提交项目 | 尝试编辑 |",
+        "reason": "T1/T4与F3/F6/F7覆盖草稿、零预算、缺服务商、日期倒置和提交后编辑的文档预期；未追加数据库/API。"
+      }
+    ],
+    "cli_reported_usage": {
+      "input_tokens": 52848,
+      "output_tokens": 13644,
+      "cache_read_input_tokens": 276736,
+      "cache_creation_input_tokens": 0
+    },
+    "cli_reported_total_cost_usd": 0.7437080000000001
+  }
+]

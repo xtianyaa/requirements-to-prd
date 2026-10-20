@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "skill_version": "1.7",
+  "activation_mode": "injected-full-bundle-not-native-discovery",
+  "hash_normalization": "UTF-8 bytes; CRLF normalized to LF",
+  "rule_files": {
+    "SKILL.md": "f0abe38625752f83c7bbb7019f6f3bfe35ce5aa15dce8c7c65cf8458e88d8aff",
+    "references/page-composition-rules.md": "79cd4b8338b680dbd974fdc7e623786a8fc66634d373844175824c458d2f481c",
+    "references/page-data-flow.md": "10a7da06ae2999a3252bbedce683259e3d953baacc1d4586167d35e165c7063a",
+    "references/page-field-specification.md": "29448472c8c94cacc77b532a669158de2b3615e59e98ed69d5c2789b9f0c57ab",
+    "references/business-readiness.md": "241748dd6e82dabd8467ebd0f81f1768406950fa71f48bf82e95b3f3df29e469"
+  },
+  "records": [
+    {
+      "case_id": "contacts",
+      "arm": "baseline",
+      "input_sha256": "4e62ab5882a53609ce8e89045ebadb9a3d831b7214d2301582ac06a70f5b79cb",
+      "rubric_sha256": "e598f84504b16908b9730b2bb78f017090f963018784a7e139edc94dc8969d35",
+      "prompt_file": "contacts.baseline.prompt.md",
+      "prompt_sha256": "2062cb7d936d4e3d7b866daddb984e90687c360914aaa16e6ddca65f381c26f4"
+    },
+    {
+      "case_id": "contacts",
+      "arm": "skill",
+      "input_sha256": "4e62ab5882a53609ce8e89045ebadb9a3d831b7214d2301582ac06a70f5b79cb",
+      "rubric_sha256": "e598f84504b16908b9730b2bb78f017090f963018784a7e139edc94dc8969d35",
+      "prompt_file": "contacts.skill.prompt.md",
+      "prompt_sha256": "d07b5934f392afc6ee6b5cd9f2eb5c89c3855294c28fc49b450dadf19d42fd28"
+    },
+    {
+      "case_id": "notice",
+      "arm": "baseline",
+      "input_sha256": "18d1769251dc9038be80aacbac72456709220c3738880e925bff070ffd5ca73a",
+      "rubric_sha256": "d1d245ce0bc08da3bfa69c825ce34288a4eb1e356742edd7bef1e0c6d911ffb1",
+      "prompt_file": "notice.baseline.prompt.md",
+      "prompt_sha256": "242499eff0651f393931ed303e2dc36448b95867dbc5a04ee8cf97b0c6948a36"
+    },
+    {
+      "case_id": "notice",
+      "arm": "skill",
+      "input_sha256": "18d1769251dc9038be80aacbac72456709220c3738880e925bff070ffd5ca73a",
+      "rubric_sha256": "d1d245ce0bc08da3bfa69c825ce34288a4eb1e356742edd7bef1e0c6d911ffb1",
+      "prompt_file": "notice.skill.prompt.md",
+      "prompt_sha256": "2d1604b86e99f764e0a974f5332626f2cdd3c65d109647cca3a8f9250959f968"
+    },
+    {
+      "case_id": "project-register",
+      "arm": "baseline",
+      "input_sha256": "a2b0880e072417e5a95be3344b1b6b03b2cea58d9bd1a8186159b52154aa3ade",
+      "rubric_sha256": "d27faca7b9dd217096d2ead95a4ad18c8effd10ee9de94f644a4e930b6765d9a",
+      "prompt_file": "project-register.baseline.prompt.md",
+      "prompt_sha256": "9299d92314462f391c220d549b1cc6191f995b9733e1565e6105156e8197daba"
+    },
+    {
+      "case_id": "project-register",
+      "arm": "skill",
+      "input_sha256": "a2b0880e072417e5a95be3344b1b6b03b2cea58d9bd1a8186159b52154aa3ade",
+      "rubric_sha256": "d27faca7b9dd217096d2ead95a4ad18c8effd10ee9de94f644a4e930b6765d9a",
+      "prompt_file": "project-register.skill.prompt.md",
+      "prompt_sha256": "dbbf153adcc715e70d606b0285ed2666f8e48e243d3506c964f2b12759ca0113"
+    }
+  ]
+}

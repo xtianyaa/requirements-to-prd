@@ -1,6 +1,7 @@
 ---
 name: requirements-to-prd
 description: 将招标文件、需求书、功能清单或访谈转为可评审的功能设计或 PRD，保留来源、提出候选方案并支持局部修订。不用于单纯排版或技术实现。
+license: MIT
 metadata:
   version: "1.7"
 ---
