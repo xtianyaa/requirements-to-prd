@@ -2,9 +2,9 @@
 
 **把原始需求整理成可评审、可追溯的 PRD。**
 
-一个供 Codex 使用的 AI Skill。支持从招标文件、需求书、功能清单和访谈记录出发，梳理产品范围、用户任务、业务流程和页面字段，保留原文依据，并指出仍需决定的问题。
+一个采用 [Agent Skills](https://agentskills.io/specification) 格式的需求分析与 PRD 编写技能，面向支持该格式的 AI 助手。支持从招标文件、需求书、功能清单和访谈记录出发，梳理产品范围、用户任务、业务流程和页面字段，保留原文依据，并指出仍需决定的问题。
 
-当前版本：**v1.7** · [技能定义](SKILL.md) · [安装](#安装) · [快速开始](#快速开始) · [回归场景](evals/scenarios.md)
+当前版本：**v1.7** · [技能定义](SKILL.md) · [平台兼容与验证](#平台兼容与验证) · [安装](#安装) · [快速开始](#快速开始) · [回归场景](evals/scenarios.md)
 
 ## 为什么做这个项目
 
@@ -39,6 +39,18 @@ requirements-to-prd 为 AI 提供一套需求整理与核验方法，让生成�
 
 输入材料需要由当前 AI 环境实际读取。DOCX、PDF 等文件的解析能力取决于宿主环境，本仓库本身不包含文件解析器。
 
+## 平台兼容与验证
+
+核心内容由 `SKILL.md` 和 Markdown 参考文档组成，不依赖 Codex 专用 API。支持 Agent Skills 格式的工具可以按各自方式加载；安装目录、技能触发、参考文件读取和输入材料解析能力仍由宿主工具提供。
+
+| 工具 | 格式与使用说明 | 本仓库验证情况 |
+|---|---|---|
+| Codex | 本仓库提供安装示例，使用全局技能目录 | 已安装并用于 PRD 生成与评审 |
+| Claude Code | 支持 Agent Skills，可读取技能及配套参考文件；见[官方文档](https://code.claude.com/docs/en/skills) | 尚未实测本技能 |
+| Cursor | 支持技能目录和 `SKILL.md`；见[官方文档](https://cursor.com/help/customization/skills) | 尚未实测本技能 |
+
+格式支持不代表各平台的生成效果已经验证，也不保证不同模型输出相同。迁移后可使用 [回归场景](evals/scenarios.md) 检查技能加载、来源追溯、字段细则和业务推演；实际生成的 PRD 仍需评审。
+
 ## 安装
 
 ### 在 Codex 中安装
@@ -54,20 +66,22 @@ requirements-to-prd 为 AI 提供一套需求整理与核验方法，让生成�
 
 指定提交可以固定技能版本，避免安装到其他分支上的旧版本。该提交的 [SKILL.md](https://github.com/xtianyaa/requirements-to-prd/blob/24514d47c352515d478e8b397569d07881e830f4/SKILL.md) 包含 v1.7 的功能定义。安装后在下一轮对话中调用。
 
-### 手动安装
+### 手动安装到 Codex、Claude Code 或 Cursor
 
 1. 下载或克隆本仓库，并切换到所需版本；安装 v1.7 可使用上面的提交。
-2. 在 Codex 技能目录下创建 `requirements-to-prd` 文件夹。
+2. 在所用工具的技能目录下创建 `requirements-to-prd` 文件夹，个人技能目录见下表。
 3. 将 `SKILL.md`、`README.md`、`references/` 和 `evals/` 复制进去，无需复制 `.git/`。
+4. 按对应工具的技能加载方式启用，并使用下方提示词。本仓库尚未在 Claude Code、Cursor 中实测，请先确认技能和参考文件能够被读取。
 
-默认全局目录为：
+默认个人技能目录为：
 
-| 环境 | 目录 |
+| 工具 | 目录 |
 |---|---|
-| Windows | `%USERPROFILE%\.codex\skills\requirements-to-prd` |
-| macOS / Linux | `~/.codex/skills/requirements-to-prd` |
+| Codex | `~/.codex/skills/requirements-to-prd/` |
+| Claude Code | `~/.claude/skills/requirements-to-prd/` |
+| Cursor | `~/.cursor/skills/requirements-to-prd/` |
 
-设置了 `CODEX_HOME` 时，使用其下的 `skills/requirements-to-prd`。更新前请备份已有目录。
+`~` 表示用户主目录，Windows 下可用 `%USERPROFILE%` 定位，例如 Codex 的目录为 `%USERPROFILE%\.codex\skills\requirements-to-prd`。Codex 设置了 `CODEX_HOME` 时，使用其下的 `skills/requirements-to-prd`；项目级安装或受管理环境按对应工具的文档配置。更新前请备份已有目录。
 
 ## 快速开始
 
