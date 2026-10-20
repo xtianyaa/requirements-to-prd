@@ -4,7 +4,7 @@
 
 一个采用 [Agent Skills](https://agentskills.io/specification) 格式的需求分析与 PRD 编写技能，面向支持该格式的 AI 助手。支持从招标文件、需求书、功能清单和访谈记录出发，梳理产品范围、用户任务、业务流程和页面字段，保留原文依据，并指出仍需决定的问题。
 
-当前版本：**v1.7** · [MIT License](LICENSE) · [技能定义](SKILL.md) · [安装](#安装) · [公开样本与评测](evals/README.md) · [变更记录](CHANGELOG.md)
+当前版本：**v1.7.1** · [MIT License](LICENSE) · [技能定义](SKILL.md) · [安装](#安装) · [公开样本与评测](evals/README.md) · [变更记录](CHANGELOG.md)
 
 ## 为什么做这个项目
 
@@ -60,15 +60,15 @@ requirements-to-prd 为 AI 提供一套需求整理与核验方法，让生成�
 ```text
 请使用 skill-installer，从 https://github.com/xtianyaa/requirements-to-prd
 安装 requirements-to-prd 到全局技能目录。
-使用发布标签 v1.7。
+使用发布标签 v1.7.1。
 如果已经安装，请备份旧版后更新。
 ```
 
-使用[发布标签 v1.7](https://github.com/xtianyaa/requirements-to-prd/releases/tag/v1.7)固定安装快照；Release、技能元数据与变更记录对应同一版本。安装后在下一轮对话中调用。
+使用[发布标签 v1.7.1](https://github.com/xtianyaa/requirements-to-prd/releases/tag/v1.7.1)固定安装快照；Release、技能元数据与变更记录对应同一版本。安装后在下一轮对话中调用。
 
 ### 手动安装到 Codex、Claude Code 或 Cursor
 
-1. 下载对应 Release，或克隆本仓库并执行 `git checkout v1.7`。
+1. 下载对应 Release，或克隆本仓库并执行 `git checkout v1.7.1`。
 2. 在所用工具的技能目录下创建 `requirements-to-prd` 文件夹，个人技能目录见下表。
 3. 将 `SKILL.md`、`LICENSE`、`README.md`、`references/` 复制进去；`evals/`、`scripts/` 和 `CHANGELOG.md` 按验证或查阅需要保留，无需复制 `.git/`。
 4. 按对应工具的技能加载方式启用，并使用下方提示词。本仓库尚未验证 Claude Code、Cursor 的原生技能加载，请先确认技能和参考文件能够被读取。
@@ -179,6 +179,8 @@ requirements-to-prd/
 辅助工具的完整性测试见 `tests/`，可运行 `python -m unittest discover -s tests`；不调用模型，也不验证业务生成效果。
 
 ## 版本说明
+
+- **v1.7.1**：修正评测快照的文件命名与版本记录，避免安装时递归发现重复技能；业务规则与 v1.7 相同。
 
 - **v1.7**：页面字段细则纳入默认交付，补充查询、展示、表单和不同状态之间的一致性检查。
 - **v1.6**：补充业务推演、规则与能力依赖检查，按模块说明后续设计和开发条件。

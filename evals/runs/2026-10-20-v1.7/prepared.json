@@ -59,5 +59,12 @@
       "prompt_file": "project-register.skill.prompt.md",
       "prompt_sha256": "dbbf153adcc715e70d606b0285ed2666f8e48e243d3506c964f2b12759ca0113"
     }
-  ]
+  ],
+  "snapshot_files": {
+    "SKILL.md": "skill-definition.md",
+    "references/page-composition-rules.md": "references/page-composition-rules.md",
+    "references/page-data-flow.md": "references/page-data-flow.md",
+    "references/page-field-specification.md": "references/page-field-specification.md",
+    "references/business-readiness.md": "references/business-readiness.md"
+  }
 }

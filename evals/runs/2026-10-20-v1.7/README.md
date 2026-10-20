@@ -40,6 +40,8 @@
 
 ## 完整性检查
 
+v1.7.1 打包修正仅将本记录中的 `snapshot/SKILL.md` 改名为 `snapshot/skill-definition.md`，并增加存储映射，避免安装时重复发现技能。原始输入、注入请求、快照内容、模型输出和评分均未因此改变；本记录仍属于 v1.7 首轮评测。
+
 ```bash
 python scripts/eval_bundle.py check evals/runs/2026-10-20-v1.7
 ```

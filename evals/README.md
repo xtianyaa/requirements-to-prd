@@ -30,6 +30,8 @@ python scripts/eval_bundle.py prepare /path/to/new-run
 
 目标目录必须不存在，防止覆盖已有证据。脚本保存输入、rubric、技能快照、两组请求和 SHA256 清单。为便于跨平台重放，输入与规则快照统一为 UTF-8、LF 换行。
 
+技能快照以 `skill-definition.md` 保存，避免被工具当作新的技能入口。`prepared.json` 的 `snapshot_files` 将逻辑来源名映射到存储文件名；哈希仍对应原内容。旧版未提供映射的记录也可核验。
+
 将每个 `*.prompt.md` 原样送入独立会话，把生成的 `output.md` 保存到运行目录下。两组保持相同工具条件；不要给生成者 rubric。请求采用**全量规则注入**，与原生按需加载不同。使用自己的模型 CLI/API 时，按对应工具文档调用；本仓库不绑定模型厂商、不读取 API 密钥，也不提供一个假装通用的执行命令。
 
 ## 记录与核验

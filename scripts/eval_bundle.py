@@ -5,6 +5,7 @@ This script does NOT call a model or grade business correctness.
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,6 +13,11 @@ RULE_FILES = ['SKILL.md', 'references/page-composition-rules.md',
               'references/page-data-flow.md', 'references/page-field-specification.md',
               'references/business-readiness.md']
 ARMS = ['baseline', 'skill']
+
+
+def snapshot_name(name):
+    # Evaluation snapshots must not register as another installable skill.
+    return 'skill-definition.md' if name == 'SKILL.md' else name
 
 
 def sha(data):
@@ -31,12 +37,12 @@ def prepare(destination):
     hashes = {}
     for name in RULE_FILES:
         data = canonical((ROOT / name).read_bytes())
-        target = snapshot / name
+        target = snapshot / snapshot_name(name)
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
         hashes[name] = sha(data)
     bundle = '\n\n'.join('## Skill resource: ' + name + '\n\n' +
-                          (snapshot / name).read_text(encoding='utf-8') for name in RULE_FILES)
+                          (snapshot / snapshot_name(name)).read_text(encoding='utf-8') for name in RULE_FILES)
     records = []
     for source in sorted((ROOT / 'evals/cases').glob('*/input.md')):
         case = source.parent.name
@@ -59,10 +65,14 @@ def prepare(destination):
             records.append(dict(case_id=case, arm=arm,
                                 input_sha256=sha(data), rubric_sha256=sha(rubric),
                                 prompt_file=name, prompt_sha256=sha((out / name).read_bytes())))
-    manifest = dict(schema_version=1, skill_version='1.7',
+    version_match = re.search(r'^\s+version:\s*"([^"]+)"', (ROOT / 'SKILL.md').read_text(encoding='utf-8'), re.M)
+    if not version_match:
+        raise ValueError('Missing skill metadata.version')
+    manifest = dict(schema_version=1, skill_version=version_match.group(1),
                     activation_mode='injected-full-bundle-not-native-discovery',
                     hash_normalization='UTF-8 bytes; CRLF normalized to LF',
-                    rule_files=hashes, records=records)
+                    rule_files=hashes,
+                    snapshot_files={name: snapshot_name(name) for name in RULE_FILES}, records=records)
     (out / 'prepared.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(dict(prepared=str(out), records=len(records)), ensure_ascii=False))
 
@@ -71,7 +81,8 @@ def check(directory):
     root = Path(directory).resolve()
     m = json.loads((root / 'prepared.json').read_text(encoding='utf-8'))
     for name, digest in m['rule_files'].items():
-        assert sha((root / 'snapshot' / name).read_bytes()) == digest, name
+        saved_name = m.get('snapshot_files', {}).get(name, name)
+        assert sha((root / 'snapshot' / saved_name).read_bytes()) == digest, name
     for r in m['records']:
         assert sha((root / r['prompt_file']).read_bytes()) == r['prompt_sha256'], r['prompt_file']
         assert sha((root / 'cases' / r['case_id'] / 'input.md').read_bytes()) == r['input_sha256']

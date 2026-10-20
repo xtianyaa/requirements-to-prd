@@ -58,6 +58,10 @@ class EvalIntegrityTests(unittest.TestCase):
         (self.run / 'results.json').write_text(json.dumps(rows[:-1]), encoding='utf-8')
         self.assertNotEqual(self.call('check').returncode, 0)
 
+    def test_snapshot_does_not_register_another_skill(self):
+        self.assertEqual(list(self.run.rglob('SKILL.md')), [])
+        self.assertTrue((self.run / 'snapshot/skill-definition.md').is_file())
+
 
 if __name__ == '__main__':
     unittest.main()
